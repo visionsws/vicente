@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fusio.tag.dao.custom.ExtTTestMapper">
+	<select id="custom" parameterType="hashmap"
+		resultType="hashmap">
+		select * from t_test
+	</select>
+	
+	
+	<select id="test_json1" parameterType="hashmap"
+		resultType="hashmap">
+		SELECT JSON_EXTRACT(DATA, '$.name'),JSON_EXTRACT(DATA,'$.address') FROM t_test_json;
+	</select>
+	
+	
+	<select id="test_json2" parameterType="hashmap"
+		resultType="hashmap">
+		SELECT * FROM t_test_json WHERE JSON_EXTRACT(DATA, '$.name')='David';
+	</select>
+	
+</mapper>

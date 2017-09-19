@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fusio.tag.dao.custom.ExtCatgMapper">
+	<insert id="insertCatgBatch" parameterType="List"> 
+	      insert into catg(
+		  	  catg_id,
+			  name,
+			  full_name,
+			  code,
+			  level,
+			  pid,
+			  status,
+			  full_id,
+			  created_at,
+			  created_by,
+			  updated_by
+	    )
+	    values 
+	    <foreach collection="list" item="item" index="index" separator="," >  
+	       (
+		  		#{item.catgId},
+				#{item.name},
+				#{item.fullName},
+				#{item.code},
+				#{item.level},
+				#{item.pid},
+				#{item.status},
+				#{item.fullId},
+				#{item.createdAt},
+				#{item.createdBy},
+				#{item.updatedBy}
+	       )  
+	    </foreach>
+    </insert>
+	
+</mapper>

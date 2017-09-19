@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- mybatis代码自动生成工具,maven插件 -->
+	<!-- 默认这个名字,不要改（generatorConfig.xml） -->
+	<!-- 在pom.xml中声明依赖就不需要指定jdbc驱动的位置了 -->
+	<!-- <classPathEntry location="E:\DevFolder\thirdparty\maven-repo\mysql\mysql-connector-java\5.1.16\mysql-connector-java-5.1.16.jar" 
+		/> -->
+
+	<!-- 从properties文件读取 -->
+	<properties resource="application.properties" />
+
+	<context id="db2modelContext" targetRuntime="MyBatis3">
+		<!-- 生成的pojo，将implements Serializable -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+
+		<!-- 指定jdbc连接的必要元素,如果从jdbc.properties读,就不需要再指定 -->
+		<jdbcConnection driverClass="${db.mysql.driver}"
+			connectionURL="${db.mysql.url}" userId="${db.mysql.username}"
+			password="${db.mysql.password}">
+		</jdbcConnection>
+
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+
+		<!-- 实体类生成在哪个包里由targetPackage指定,自动生成不存在的目录 -->
+		<javaModelGenerator targetPackage="com.fusio.tag.model.autogen"
+			targetProject="./src/main/java" />
+
+		<!-- 生成的xml放到哪里 -->
+		<sqlMapGenerator targetPackage="mappers/autogen"
+			targetProject="./src/main/resources" />
+
+		<!-- 生成的接口类房到哪里 -->
+		<javaClientGenerator targetPackage="com.fusio.tag.dao.autogen"
+			targetProject="./src/main/java" type="XMLMAPPER" />
+
+
+		<!-- 需要生成的表 -->
+		<!-- 可以写上不存在的表不抛错,只是忽略,例如表tb_xxyyzz -->
+		<!-- schema随便写(可以不写）,mysql无schema概念,orcle中schema跟用户名相同,每个用户名都有一个与之同名的schema,例如scott用户有scott的schema -->
+		<!-- domainObjectName指定生成的model的类名,可以默认不指定 -->
+		<!-- enableCountByExample等属性控制是否生成该方法,默认生成 -->
+		<!-- %匹配所有表格 -->
+		<!-- <table tableName="%" ></table> -->
+		<!-- 如果有自增长的id，希望在插入后获得id，可以配置generatedKey，需要指定column，
+		sqlStatement未Mysql，identity必须为true。，在java端，insert(entity)后，由entity.getXxxId()获得自增长的id -->
+		<!-- 非自增长的不要出现generatedKey，否则报错 -->
+		<!-- <table schema="scott" tableName="tb_xxyyzz" domainObjectName="XUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" >
+			<generatedKey column="xxx_id" sqlStatement="MySql"
+				identity="true" />
+		</table> -->
+		
+		<!-- <table tableName="t_test">
+			<generatedKey column="test_id" sqlStatement="MySql" identity="true" />
+		</table>
+		-->		
+		
+		<!-- <table tableName="tag_group_jh"></table>
+		<table tableName="tag_jh"></table> -->
+		<table tableName="tags"></table>
+		<!-- <table tableName="catg"></table>
+		
+		<table tableName="tg_tag">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table> -->
+			
+
+	</context>
+</generatorConfiguration>
